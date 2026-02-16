@@ -842,6 +842,7 @@ if __name__ == "__main__":
     
     math_train = load_math_train()
     math_eval = load_math500_test()
+    math_eval = math_eval[:100] # DEBUG
     print("Train dataset size:", len(math_train))
     print("Eval dataset size:", len(math_eval))
 
@@ -861,12 +862,12 @@ if __name__ == "__main__":
         out_path=f"math500_step_0-evaluate-script.jsonl",
         tokenizer=tokenizer,
         device=device,
-        math_data=math_eval[:10],
+        math_data=math_eval,
         max_new_tokens=2048,
         verbose=False,
     )
 
-    n_step = 5
+    n_step = 10
     torch.manual_seed(0)
     train_rlvr_grpo(
         model=model,
@@ -891,7 +892,7 @@ if __name__ == "__main__":
         out_path=f"math500_step_{n_step}-evaluate-script.jsonl",
         tokenizer=tokenizer,
         device=device,
-        math_data=math_eval[:10],
+        math_data=math_eval,
         max_new_tokens=2048,
         verbose=False,
     )
